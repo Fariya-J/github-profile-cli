@@ -1,38 +1,3 @@
-# userInput = input("Enter the username")
-
-# name = ["name1", "name2","name3","name4"]
-
-# for i in name:
-#     print(i)
-
-# name = []
-# for i in range(0,3):
-#     userInput = input("Enter the username")
-#     name.append(userInput)
-
-# for i in name:
-#     print(f"https://api.github.com/users/{i}")
-
-# import requests
-# url = []
-# for i in range(0,3):
-#     userInput = input("Enter the username")
-#     url.append(f"https://api.github.com/users/{userInput}")
-
-# for i in url:
-#     print(i)
-
-# for i in url:
-#     try:
-#         r = requests.get(i, timeout=10)
-#         r.raise_for_status()
-#         user = r.json()
-#         print(user["name"], user["public_repos"])
-#         # print(user)
-#     except requests.Timeout:
-#         print("Request timed out")
-#     except requests.HTTPError as e:
-#         print(f"HTTP error: {e.response.status_code}")
 import requests
 import csv
 usernames = []
@@ -49,7 +14,7 @@ for i in usernames:
         except requests.Timeout:
            print(f"Request timed out for {i}")
 
-           with open("assignment/errors.log", "a") as file:
+           with open("errors.log", "a") as file:
             file.write(f"Request timed out for {i}\n")
            continue
 
@@ -76,7 +41,7 @@ for i in usernames:
 
             with open("errors.log", "a") as file:
                 file.write( f"Request failed for {i}: {response.status_code}\n")
-            break
+            continue
 # CSV-writing code
 fieldnames = ["login" , "name" , "public_repos" , "followers"]
 with open("github_users.csv", "w", newline="") as file:
